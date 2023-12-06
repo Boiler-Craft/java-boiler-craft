@@ -5,11 +5,9 @@ import com.intellij.psi.*
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.search.PsiShortNamesCache
 import kr.craft.javaboilercraft.processor.CompletionProcessor
-import kr.craft.javaboilercraft.processor.impl.BuilderCompletionProcessor
-import kr.craft.javaboilercraft.processor.impl.ConstructorCompletionProcessor
-import kr.craft.javaboilercraft.processor.impl.MockMvcTestCompletionProcessor
-import kr.craft.javaboilercraft.processor.util.MethodPropertiesPsiConverter
-import kr.craft.javaboilercraft.processor.util.MockMvcTestBoilerplateGenerator
+import kr.craft.javaboilercraft.processor.impl.builder.BuilderCompletionProcessor
+import kr.craft.javaboilercraft.processor.impl.constructor.ConstructorCompletionProcessor
+import kr.craft.javaboilercraft.processor.impl.restdoc.MockMvcTestCompletionProcessor
 
 
 /**

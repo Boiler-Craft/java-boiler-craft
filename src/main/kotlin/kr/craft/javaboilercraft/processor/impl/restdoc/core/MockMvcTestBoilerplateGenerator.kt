@@ -1,4 +1,4 @@
-package kr.craft.javaboilercraft.processor.util
+package kr.craft.javaboilercraft.processor.impl.restdoc.core
 
 import com.intellij.psi.*
 import kr.craft.javaboilercraft.processor.util.EditorUtils.getIndent
@@ -256,7 +256,7 @@ object MockMvcTestBoilerplateGenerator {
     }?.second
 
     private fun isDocumentableClass(targetClass: PsiClass): Boolean {
-        return targetClass.qualifiedName?.let { qualifiedName ->
+        return targetClass.isEnum || targetClass.qualifiedName?.let { qualifiedName ->
             return TypeReference.isDocumentableClass(qualifiedName)
         } ?: false
     }

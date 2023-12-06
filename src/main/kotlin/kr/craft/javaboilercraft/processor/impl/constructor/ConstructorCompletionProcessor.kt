@@ -1,4 +1,4 @@
-package kr.craft.javaboilercraft.processor.impl
+package kr.craft.javaboilercraft.processor.impl.constructor
 
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement

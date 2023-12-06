@@ -1,8 +1,5 @@
-package kr.craft.javaboilercraft.processor.impl
+package kr.craft.javaboilercraft.processor.impl.builder
 
-import com.intellij.openapi.editor.Document
-import com.intellij.openapi.fileEditor.FileDocumentManager
-import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
 import kr.craft.javaboilercraft.processor.CompletionProcessor
@@ -23,7 +20,7 @@ class BuilderCompletionProcessor : CompletionProcessor() {
     }
 
     override fun supportOption() = SUPPORT_OPTION
-    override fun applicable(targetElement: PsiElement, targetClass: PsiClass) = (targetClass.getAnnotation("${PACKAGE_NAME}.${SUPPORT_OPTION}") != null)
+    override fun applicable(targetElement: PsiElement, targetClass: PsiClass) = (targetClass.getAnnotation("$PACKAGE_NAME.$SUPPORT_OPTION") != null)
 
     override fun completionString(targetClass: PsiClass, targetElement: PsiElement): String {
         val indent = getIndent(targetElement).getIndentString()

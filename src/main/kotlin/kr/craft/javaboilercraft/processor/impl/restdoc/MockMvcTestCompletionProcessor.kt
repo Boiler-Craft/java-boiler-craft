@@ -1,10 +1,10 @@
-package kr.craft.javaboilercraft.processor.impl
+package kr.craft.javaboilercraft.processor.impl.restdoc
 
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
 import kr.craft.javaboilercraft.processor.CompletionProcessor
-import kr.craft.javaboilercraft.processor.util.MethodPropertiesPsiConverter.convert
-import kr.craft.javaboilercraft.processor.util.MockMvcTestBoilerplateGenerator.generateBoilerplate
+import kr.craft.javaboilercraft.processor.impl.restdoc.core.MethodPropertiesPsiConverter.convert
+import kr.craft.javaboilercraft.processor.impl.restdoc.core.MockMvcTestBoilerplateGenerator.generateBoilerplate
 
 /**
  * MockMvcTestCompletionProcessor

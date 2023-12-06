@@ -1,4 +1,4 @@
-package kr.craft.javaboilercraft.processor.util
+package kr.craft.javaboilercraft.processor.impl.restdoc.core
 
 import com.intellij.psi.CommonClassNames.*
 
@@ -51,18 +51,28 @@ enum class TypeReference(
             JAVA_LANG_DOUBLE,
             JAVA_LANG_NUMBER
         )
+    ),
+    TIME(
+        listOf(
+            JAVA_TIME_LOCAL_DATE,
+            JAVA_TIME_LOCAL_TIME,
+            JAVA_TIME_LOCAL_DATE_TIME,
+            JAVA_TIME_OFFSET_DATE_TIME,
+            JAVA_TIME_OFFSET_TIME,
+            JAVA_TIME_ZONED_DATE_TIME,
+        )
     )
     ;
 
     companion object {
         fun isCollection(className: String): Boolean {
             return COLLECTION.type.any { type ->
-                    className.contains(type)
+                className.contains(type)
             }
         }
 
         fun isDocumentableClass(className: String): Boolean {
-            return listOf(NUMBER, BOOLEAN, CHARACTER).find { typeReference ->
+            return listOf(NUMBER, BOOLEAN, CHARACTER, TIME).find { typeReference ->
                 typeReference.type.any { type ->
                     type.contains(className)
                 }
