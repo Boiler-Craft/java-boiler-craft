@@ -1,7 +1,6 @@
-package kr.craft.javaboilercraft.processor.impl.restdoc.core
+package kr.craft.javaboilercraft.completion.impl.restdoc.core
 
 import com.intellij.psi.*
-import org.apache.commons.lang.StringUtils.lowerCase
 
 /**
  * MethodPropertiesPsiConverter

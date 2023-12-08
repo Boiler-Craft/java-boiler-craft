@@ -1,9 +1,9 @@
-package kr.craft.javaboilercraft.processor.impl.builder
+package kr.craft.javaboilercraft.completion.impl.builder
 
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
-import kr.craft.javaboilercraft.processor.CompletionProcessor
-import kr.craft.javaboilercraft.processor.util.EditorUtils.getIndent
+import kr.craft.javaboilercraft.completion.CompletionProcessor
+import kr.craft.javaboilercraft.util.EditorUtils.getIndent
 
 /**
  * BuilderCompletionProcessor

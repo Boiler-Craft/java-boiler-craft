@@ -1,5 +1,5 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
-<idea-plugin>
+<idea-plugin url="https://github.com/Boiler-Craft/java-boiler-craft">
     <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
     <id>kr.craft.java-builder-fill</id>
 
@@ -8,14 +8,30 @@
     <name>Java-boiler-craft</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor email="boilercraft.kr@gmail.com" url="https://github.com/Boiler-Craft/java-builder-fill">Boiler-Craft</vendor>
+    <vendor email="boilercraft.kr@gmail.com" url="https://github.com/Boiler-Craft/java-boiler-craft">Boiler-Craft</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-    You input the class name and then use a dot. After that, if you choose 'All Args Constructor,' a constructor containing all parameters is automatically generated. On the other hand, if you select 'Builder Completion,' the code with the builder pattern is generated.
-    By making this selection, the code is automatically created, eliminating the need for the user to manually write each constructor or implement the builder pattern. This functionality enhances the efficiency of code writing.
+    This project aims to enhance the efficiency of code writing by automatically generating boilerplate code.
+    The main feature of this plugin
+
+    <ul>
+        <li>generation of boilerplate code for MockMvc tests for RestDocs.</li>
+        <li>generate constructors and builder patterns for a given class.</li>
+    </ul>
+
+    When you input a class name and uses a dot, in test scope,
+    the plugin automatically generates boilerplate code for MockMvc tests for RestDocs.
+
+    And You can choose between 'All Args Constructor' and 'Builder Completion'.
+    If 'All Args Constructor' is selected, a constructor containing all parameters is automatically generated.
+    If 'Builder Completion' is selected, the code with the builder pattern is generated.
+
+    This eliminates the need for the user to manually write each constructor or implement the builder pattern.
+
+
   ]]></description>
 
     <!-- Product and plugin compatibility requirements.
@@ -30,5 +46,10 @@
                 implementationClass="kr.craft.javaboilercraft.JavaBoilerCraftCompletion"/>
     </extensions>
     <actions>
+        <action id="MockMvc-boilerplate-generator" class="kr.craft.javaboilercraft.JavaBoilerCraftAction"
+                text="MockMvc Test for RestDocs"
+                description="Generating boilerplate code for MockMvc Test for RestDocs">
+            <add-to-group group-id="GenerateGroup" anchor="first"/>
+        </action>
     </actions>
 </idea-plugin>
