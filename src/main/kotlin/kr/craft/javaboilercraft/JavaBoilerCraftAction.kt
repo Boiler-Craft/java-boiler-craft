@@ -32,6 +32,10 @@ import javax.swing.ListSelectionModel
  */
 class JavaBoilerCraftAction : AnAction() {
 
+
+    /**
+     * Updates the state of the action. The action is visible only if the current cursor is in test scope.
+     */
     override fun update(e: AnActionEvent) {
         val psiFile = e.getData(CommonDataKeys.PSI_FILE)
         val editor: Editor? = e.getData(CommonDataKeys.EDITOR)
@@ -66,11 +70,17 @@ class JavaBoilerCraftAction : AnAction() {
         }
     }
 
+    /**
+     * Gets the PsiClass for the @RestController annotation.
+     */
     private fun getRestControllerClass(project: Project): PsiClass? {
         return JavaPsiFacade.getInstance(project)
             .findClass("org.springframework.web.bind.annotation.RestController", GlobalSearchScope.allScope(project))
     }
 
+    /**
+     * Gets all classes in the project that have the @RestController annotation.
+     */
     private fun getRestControllerClasses(restControllerClass: PsiClass, project: Project): MutableList<PsiClass> {
         val restControllerClasses = mutableListOf<PsiClass>()
         runReadAction {
@@ -81,6 +91,9 @@ class JavaBoilerCraftAction : AnAction() {
         return restControllerClasses
     }
 
+    /**
+     * Shows a popup to select a controller class and calls the provided callback with the selected class.
+     */
     private fun showPopUpAndGetSelectedClass(
         classList: JBList<String?>,
         editor: Editor,
@@ -96,6 +109,10 @@ class JavaBoilerCraftAction : AnAction() {
             .showInBestPositionFor(editor)
     }
 
+
+    /**
+     * Shows a MemberChooser to select methods and returns the selected methods.
+     */
     private fun showMemberChooserAndGetSelectedMethods(selectedControllerClass: PsiClass, project: Project): List<PsiMethodMember>? {
         val methods = selectedControllerClass.methods.map { PsiMethodMember(it) }
         val chooser = MemberChooser<ClassMember>(methods.toTypedArray(), false, true, project)
@@ -104,6 +121,9 @@ class JavaBoilerCraftAction : AnAction() {
         return chooser.selectedElements?.map { it as PsiMethodMember }
     }
 
+    /**
+     * Generates boilerplate code for MockMvc tests and inserts it into the document.
+     */
     private fun generateBoilerplateAndInsertIntoDocument(
         selectedControllerClass: PsiClass,
         selectedMethods: List<PsiMethodMember>,
