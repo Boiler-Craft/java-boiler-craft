@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger
  */
 object MockMvcTestBoilerplateGenerator {
 
+    @JvmStatic
     fun generateBoilerplate(methodProperty: MethodProperty, targetElement: PsiElement): String {
 
         val defaultIndent = getIndent(targetElement).getIndentString()
@@ -23,7 +24,7 @@ object MockMvcTestBoilerplateGenerator {
         mockMvcTestBoilerplate.append("${defaultIndent}${getIndentPrefix(0)}@Test\n")
         mockMvcTestBoilerplate.append("${defaultIndent}${getIndentPrefix(0)}void ${methodProperty.name}() throws Exception {\n")
         mockMvcTestBoilerplate.append("${defaultIndent}${getIndentPrefix(1)}mockMvc.perform(\n")
-        mockMvcTestBoilerplate.append(getHttpMethodAndEndPoint(methodProperty,defaultIndent))
+        mockMvcTestBoilerplate.append(getHttpMethodAndEndPoint(methodProperty, defaultIndent))
         mockMvcTestBoilerplate.append("${defaultIndent}${getIndentPrefix(3)}.contentType(MediaType.APPLICATION_JSON)\n")
 
         if (methodProperty.requestBody != null) {
@@ -67,6 +68,7 @@ object MockMvcTestBoilerplateGenerator {
         return mockMvcTestBoilerplate.toString()
     }
 
+    @JvmStatic
     private fun getRequestFieldsDocs(requestBody: PsiParameter, defaultIndent: String): String {
         val requestBodyPsiClassType = requestBody.type as PsiClassType
         return ",\n" +
@@ -85,6 +87,7 @@ object MockMvcTestBoilerplateGenerator {
                 "${defaultIndent}${getIndentPrefix(3)})"
     }
 
+    @JvmStatic
     private fun getCollectionPathPrefix(psiClassType: PsiClassType): String {
         val psiClassInfo = psiClassType.resolve() ?: return ""
         if (TypeReference.isCollection(psiClassInfo.qualifiedName ?: ""))
@@ -92,6 +95,7 @@ object MockMvcTestBoilerplateGenerator {
         return ""
     }
 
+    @JvmStatic
     private fun getResponseFieldsDocs(response: PsiType, defaultIndent: String): String {
         if (response.canonicalText == "void") return ""
         val responsePsiClassType = response as PsiClassType
@@ -111,6 +115,7 @@ object MockMvcTestBoilerplateGenerator {
                 "${defaultIndent}${getIndentPrefix(3)})"
     }
 
+    @JvmStatic
     private fun getPsiClassFrom(
         targetClass: PsiClassType,
     ): PsiClassInfo? {
@@ -128,6 +133,7 @@ object MockMvcTestBoilerplateGenerator {
         return PsiClassInfo(psiClass, typeParameterList, "")
     }
 
+    @JvmStatic
     private fun getPathParametersDocs(methodProperty: MethodProperty, defaultIndent: String) =
         methodProperty.pathVariables.joinToString(
             prefix = ",\n" +
@@ -138,6 +144,7 @@ object MockMvcTestBoilerplateGenerator {
             "${defaultIndent}${getIndentPrefix(5)}parameterWithName(\"${pathVariable.name}\").description(\"${pathVariable.name}\")"
         }
 
+    @JvmStatic
     private fun getQueryParamsDocs(methodProperty: MethodProperty, defaultIndent: String) =
         methodProperty.queryParams.joinToString(
             prefix = ",\n" +
@@ -148,9 +155,11 @@ object MockMvcTestBoilerplateGenerator {
             "${defaultIndent}${getIndentPrefix(5)}parameterWithName(\"${queryParam.name}\").description(\"${queryParam.name}\")"
         }
 
+    @JvmStatic
     private fun getHttpMethodAndEndPoint(methodProperty: MethodProperty, defaultIndent: String) =
         "${defaultIndent}${getIndentPrefix(2)}${methodProperty.httpMethodName}(${getRequestPath(methodProperty)})\n"
 
+    @JvmStatic
     private fun getRequestPath(methodProperty: MethodProperty): String {
         val baseEndPoint = methodProperty.requestPath
         var urlVariables = ""
@@ -176,6 +185,7 @@ object MockMvcTestBoilerplateGenerator {
         return if (urlVariables != "") "\"${baseEndPoint}\", ${urlVariables}" else "\"${baseEndPoint}\""
     }
 
+    @JvmStatic
     private fun generateRecursiveRestDocText(
         psiClassType: PsiClassType,
         beforeFieldName: String,
@@ -211,14 +221,14 @@ object MockMvcTestBoilerplateGenerator {
                         genericClass.className
                     )
 
-                    if(parameter is PsiPrimitiveType || isDocumentableClass(parameter.resolve()!!)){
+                    if (parameter is PsiPrimitiveType || isDocumentableClass(parameter.resolve()!!)) {
                         restDocList.add(generateFieldWithPathText(fieldName, field.name))
-                    }else if(childClassType != null){
+                    } else if (childClassType != null) {
                         fieldName += "."
                         restDocList.addAll(
                             generateRecursiveRestDocText(childClassType as PsiClassType, fieldName, atomicInteger)
                         )
-                    }else{
+                    } else {
                         fieldName += "."
                         restDocList.addAll(
                             generateRecursiveRestDocText(genericClass, fieldName, atomicInteger)
@@ -241,6 +251,7 @@ object MockMvcTestBoilerplateGenerator {
         return restDocList
     }
 
+    @JvmStatic
     private fun getPsiType(
         psiClass: PsiClassInfo,
         type: PsiField,
@@ -248,6 +259,7 @@ object MockMvcTestBoilerplateGenerator {
         typeParameter.first.text == type.type.canonicalText
     }?.second ?: type.type
 
+    @JvmStatic
     private fun getPsiTypeByClassName(
         psiClass: PsiClassInfo,
         className: String,
@@ -255,21 +267,18 @@ object MockMvcTestBoilerplateGenerator {
         typeParameter.first.text == className
     }?.second
 
+    @JvmStatic
     private fun isDocumentableClass(targetClass: PsiClass): Boolean {
         return targetClass.isEnum || targetClass.qualifiedName?.let { qualifiedName ->
             return TypeReference.isDocumentableClass(qualifiedName)
         } ?: false
     }
 
+    @JvmStatic
     private fun getIndentPrefix(depth: Int) =
         "\t".repeat(depth)
 
+    @JvmStatic
     private fun generateFieldWithPathText(fieldNameWithPath: String, fieldName: String) =
         "fieldWithPath(\"$fieldNameWithPath\").description(\"$fieldName\")"
 }
-
-data class PsiClassInfo(
-    val psiClass: PsiClass,
-    val genericTypeParameters: List<Pair<PsiTypeParameter, PsiType>>,
-    val pathPrefix: String,
-)

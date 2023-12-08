@@ -16,6 +16,7 @@ object MethodPropertiesPsiConverter {
     private const val REQUEST_PARAM = "RequestParam"
     private const val REQUEST_BODY = "RequestBody"
 
+    @JvmStatic
     fun convert(targetClass: PsiClass, targetMethod: PsiMethod): MethodProperty? {
         val (httpMethodAnnotation, httpMethodMapping) = getHttpMethodAnnotation(targetMethod)
         if (httpMethodAnnotation == null || httpMethodMapping == null) return null
@@ -29,7 +30,7 @@ object MethodPropertiesPsiConverter {
         return MethodProperty(
             name = targetMethod.name,
             requestPath = requestPath,
-            httpMethodName = lowerCase(httpMethod.name),
+            httpMethodName = httpMethod.name.lowercase(),
             pathVariables = pathVariables,
             queryParams = queryParams,
             requestBody = requestBody,
@@ -37,15 +38,17 @@ object MethodPropertiesPsiConverter {
         )
     }
 
+    @JvmStatic
     private fun getResponseType(targetMethod: PsiMethod) = targetMethod.returnType
 
+    @JvmStatic
     private fun getRequestBody(targetMethod: PsiMethod) =
         targetMethod.parameterList.parameters.find { parameter ->
             parameter.annotations.any { annotation ->
                 annotation.qualifiedName?.contains(REQUEST_BODY) == true
             }
         }
-
+    @JvmStatic
     private fun getQueryParams(targetMethod: PsiMethod): List<PsiParameter> {
         return targetMethod.parameterList.parameters.filter { parameter ->
             parameter.annotations.any { annotation ->
@@ -54,6 +57,7 @@ object MethodPropertiesPsiConverter {
         }
     }
 
+    @JvmStatic
     private fun getPathVariableSize(targetMethod: PsiMethod): List<PsiParameter> {
         return targetMethod.parameterList.parameters.filter { parameter ->
             parameter.annotations.any { annotation ->
@@ -62,6 +66,7 @@ object MethodPropertiesPsiConverter {
         }
     }
 
+    @JvmStatic
     private fun getHttpMethodAnnotation(targetMethod: PsiMethod): Pair<PsiAnnotation?, HttpMethodMapping?> {
         var httpMethodMapping: HttpMethodMapping? = null
         val annotation = targetMethod.annotations.find { annotation ->
@@ -73,6 +78,7 @@ object MethodPropertiesPsiConverter {
         return Pair(annotation, httpMethodMapping)
     }
 
+    @JvmStatic
     private fun getRequestPath(
         targetClass: PsiClass,
         httpMethodAnnotation: PsiAnnotation,
@@ -88,16 +94,20 @@ object MethodPropertiesPsiConverter {
         ).joinToString( separator = "")
 
     }
+
+    @JvmStatic
     private fun getPathMappingValue(httpMethodAnnotation: PsiAnnotation): String {
         val value = getAttributeValue(httpMethodAnnotation, "value")
         val path = getAttributeValue(httpMethodAnnotation, "path")
         return (if (value.length > path.length) value else path).replace("\"", "")
     }
 
+    @JvmStatic
     private fun getAttributeValue(httpMethodAnnotation: PsiAnnotation, attributeName: String): String {
         return httpMethodAnnotation.findAttributeValue(attributeName)?.text?.replace("{}", "") ?: ""
     }
 
+    @JvmStatic
     private fun handleRequestMapping(
         httpMethodMapping: HttpMethodMapping,
         httpMethodAnnotation: PsiAnnotation,
