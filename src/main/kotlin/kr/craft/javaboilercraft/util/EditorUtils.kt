@@ -1,9 +1,8 @@
-package kr.craft.javaboilercraft.processor.util
+package kr.craft.javaboilercraft.util
 
 import com.intellij.openapi.editor.Document
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.fileEditor.FileDocumentManager
-import com.intellij.openapi.util.NlsSafe
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 

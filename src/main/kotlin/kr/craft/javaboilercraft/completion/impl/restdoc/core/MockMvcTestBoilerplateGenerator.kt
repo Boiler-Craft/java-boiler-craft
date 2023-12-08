@@ -1,7 +1,6 @@
-package kr.craft.javaboilercraft.processor.impl.restdoc.core
+package kr.craft.javaboilercraft.completion.impl.restdoc.core
 
 import com.intellij.psi.*
-import kr.craft.javaboilercraft.processor.util.EditorUtils.getIndent
 import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
 

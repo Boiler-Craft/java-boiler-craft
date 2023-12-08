@@ -1,8 +1,8 @@
-package kr.craft.javaboilercraft.processor.impl.constructor
+package kr.craft.javaboilercraft.completion.impl.constructor
 
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
-import kr.craft.javaboilercraft.processor.CompletionProcessor
+import kr.craft.javaboilercraft.completion.CompletionProcessor
 
 /**
  * BuilderCompletionProcessor

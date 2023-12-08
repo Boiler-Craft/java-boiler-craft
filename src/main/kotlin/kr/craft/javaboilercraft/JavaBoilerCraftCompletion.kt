@@ -4,12 +4,10 @@ import com.intellij.codeInsight.completion.*
 import com.intellij.psi.*
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.search.PsiShortNamesCache
-import kr.craft.javaboilercraft.processor.CompletionProcessor
-import kr.craft.javaboilercraft.processor.impl.builder.BuilderCompletionProcessor
-import kr.craft.javaboilercraft.processor.impl.constructor.ConstructorCompletionProcessor
-import kr.craft.javaboilercraft.processor.impl.restdoc.MockMvcTestCompletionProcessor
-import kr.craft.javaboilercraft.processor.impl.restdoc.core.MethodPropertiesPsiConverter
-import kr.craft.javaboilercraft.processor.impl.restdoc.core.MockMvcTestBoilerplateGenerator
+import kr.craft.javaboilercraft.completion.CompletionProcessor
+import kr.craft.javaboilercraft.completion.impl.builder.BuilderCompletionProcessor
+import kr.craft.javaboilercraft.completion.impl.constructor.ConstructorCompletionProcessor
+import kr.craft.javaboilercraft.completion.impl.restdoc.MockMvcTestCompletionProcessor
 
 
 /**

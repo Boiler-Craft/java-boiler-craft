@@ -1,4 +1,4 @@
-package kr.craft.javaboilercraft.processor.impl.restdoc.core
+package kr.craft.javaboilercraft.completion.impl.restdoc.core
 
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiType

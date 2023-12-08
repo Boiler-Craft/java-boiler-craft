@@ -17,10 +17,10 @@ import com.intellij.psi.PsiClass
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.search.searches.AnnotatedElementsSearch
 import com.intellij.ui.components.JBList
-import kr.craft.javaboilercraft.processor.impl.restdoc.core.MethodPropertiesPsiConverter
-import kr.craft.javaboilercraft.processor.impl.restdoc.core.MockMvcTestBoilerplateGenerator
-import kr.craft.javaboilercraft.processor.util.EditorUtils.getIndent
-import kr.craft.javaboilercraft.processor.util.EditorUtils.isCurrentCursorInTestScope
+import kr.craft.javaboilercraft.completion.impl.restdoc.core.MethodPropertiesPsiConverter
+import kr.craft.javaboilercraft.completion.impl.restdoc.core.MockMvcTestBoilerplateGenerator
+import kr.craft.javaboilercraft.util.EditorUtils.getIndent
+import kr.craft.javaboilercraft.util.EditorUtils.isCurrentCursorInTestScope
 import javax.swing.ListSelectionModel
 
 /**

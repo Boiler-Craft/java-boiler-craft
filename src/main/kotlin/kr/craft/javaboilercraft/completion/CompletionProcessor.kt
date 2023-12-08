@@ -1,4 +1,4 @@
-package kr.craft.javaboilercraft.processor
+package kr.craft.javaboilercraft.completion
 
 import com.intellij.codeInsight.completion.CompletionResultSet
 import com.intellij.codeInsight.lookup.LookupElementBuilder
