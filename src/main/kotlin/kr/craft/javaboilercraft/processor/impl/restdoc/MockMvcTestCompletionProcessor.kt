@@ -5,6 +5,8 @@ import com.intellij.psi.PsiElement
 import kr.craft.javaboilercraft.processor.CompletionProcessor
 import kr.craft.javaboilercraft.processor.impl.restdoc.core.MethodPropertiesPsiConverter
 import kr.craft.javaboilercraft.processor.impl.restdoc.core.MockMvcTestBoilerplateGenerator
+import kr.craft.javaboilercraft.processor.util.EditorUtils
+import kr.craft.javaboilercraft.processor.util.EditorUtils.isCurrentCursorInTestScope
 
 /**
  * MockMvcTestCompletionProcessor
@@ -17,8 +19,6 @@ class MockMvcTestCompletionProcessor: CompletionProcessor() {
 
     companion object {
         private const val SUPPORT_OPTION = "MockMvc Test for RestDocs"
-        private const val TEST_FILE_PATH = "/test"
-        private const val SRC_TEST_FILE_PATH = "/src/test"
         private const val CONTROLLER = "Controller"
     }
 
@@ -31,14 +31,10 @@ class MockMvcTestCompletionProcessor: CompletionProcessor() {
         }
     }
 
-    private fun isCurrentCursorInTestScope(filePath: String) =
-        filePath.let { it.contains(TEST_FILE_PATH) || it.contains(SRC_TEST_FILE_PATH) }
-
-
     override fun completionString(targetClass: PsiClass, targetElement: PsiElement): String {
         val result = targetClass.allMethods.mapNotNull { method ->
             MethodPropertiesPsiConverter.convert(targetClass, method)?.let {
-                MockMvcTestBoilerplateGenerator.generateBoilerplate(it, targetElement)
+                MockMvcTestBoilerplateGenerator.generateBoilerplate(it, EditorUtils.getIndent(targetElement).getIndentString())
             }
         }
         return result.joinToString("\n")

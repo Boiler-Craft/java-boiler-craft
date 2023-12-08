@@ -16,9 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger
 object MockMvcTestBoilerplateGenerator {
 
     @JvmStatic
-    fun generateBoilerplate(methodProperty: MethodProperty, targetElement: PsiElement): String {
-
-        val defaultIndent = getIndent(targetElement).getIndentString()
+    fun generateBoilerplate(methodProperty: MethodProperty, defaultIndent: String): String {
 
         val mockMvcTestBoilerplate = StringBuilder()
         mockMvcTestBoilerplate.append("${defaultIndent}${getIndentPrefix(0)}@Test\n")

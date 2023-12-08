@@ -1,5 +1,5 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
-<idea-plugin>
+<idea-plugin url="https://github.com/Boiler-Craft/java-boiler-craft">
     <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
     <id>kr.craft.java-builder-fill</id>
 
@@ -30,5 +30,10 @@
                 implementationClass="kr.craft.javaboilercraft.JavaBoilerCraftCompletion"/>
     </extensions>
     <actions>
+        <action id="MockMvc-boilerplate-generator" class="kr.craft.javaboilercraft.JavaBoilerCraftAction"
+                text="MockMvc Test for RestDocs"
+                description="Generating boilerplate code for MockMvc Test for RestDocs">
+            <add-to-group group-id="GenerateGroup" anchor="first"/>
+        </action>
     </actions>
 </idea-plugin>
