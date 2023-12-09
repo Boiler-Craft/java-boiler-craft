@@ -98,12 +98,11 @@ class JavaBoilerCraftAction : AnAction() {
         classList: JBList<String?>,
         editor: Editor,
         onItemSelected: (String) -> Unit,
-    ) {
+    ){
         PopupChooserBuilder(classList)
             .setTitle("Select Controller Class to Generate MockMvc Test")
-            .setItemChoosenCallback {
-                val selectedClass = classList.selectedValue ?: ""
-                onItemSelected(selectedClass)
+            .setItemChosenCallback {
+                onItemSelected(classList.selectedValue ?: "")
             }
             .createPopup()
             .showInBestPositionFor(editor)
