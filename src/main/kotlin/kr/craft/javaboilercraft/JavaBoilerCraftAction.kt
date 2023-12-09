@@ -17,6 +17,7 @@ import com.intellij.psi.PsiClass
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.search.searches.AnnotatedElementsSearch
 import com.intellij.ui.components.JBList
+import kr.craft.javaboilercraft.completion.impl.restdoc.core.HttpMethodMapping
 import kr.craft.javaboilercraft.completion.impl.restdoc.core.MethodPropertiesPsiConverter
 import kr.craft.javaboilercraft.completion.impl.restdoc.core.MockMvcTestBoilerplateGenerator
 import kr.craft.javaboilercraft.util.EditorUtils.getIndent
@@ -113,7 +114,15 @@ class JavaBoilerCraftAction : AnAction() {
      * Shows a MemberChooser to select methods and returns the selected methods.
      */
     private fun showMemberChooserAndGetSelectedMethods(selectedControllerClass: PsiClass, project: Project): List<PsiMethodMember>? {
-        val methods = selectedControllerClass.methods.map { PsiMethodMember(it) }
+        val methods = selectedControllerClass.methods.filter {
+            memberMethod -> memberMethod.annotations.find { annotation ->
+                HttpMethodMapping.values().find { mapping ->
+                    annotation.qualifiedName?.contains(mapping.methodMapping) == true
+                } != null
+            } != null
+        }.map {
+            PsiMethodMember(it)
+        }
         val chooser = MemberChooser<ClassMember>(methods.toTypedArray(), false, true, project)
         chooser.title = "Select Methods to Generate MockMvc Test"
         chooser.show()
