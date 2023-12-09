@@ -115,8 +115,9 @@ object MethodPropertiesPsiConverter {
             httpMethodMapping
         else {
             HttpMethodMapping.values().find { httpMethod ->
-                (httpMethodAnnotation.findAttributeValue("method")?.text
-                    ?.contains(httpMethod.name) == true)
+                (httpMethodAnnotation.findAttributeValue("method")?.text?.
+                replace("RequestMethod.","")?.contains(httpMethod.name))?:false
+
             }
         }
     }
