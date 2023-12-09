@@ -1,17 +1,28 @@
 # java-boiler-craft plugin
-You input the class name and then use a dot. After that,   
-if you choose 'All Args Constructor,' a constructor containing all parameters is automatically generated.  
+This project aims to enhance the efficiency of code writing by automatically generating boilerplate code.
+The main feature of this plugin
 
-On the other hand,  
-if you select 'Builder Completion,' the code with the builder pattern is generated.  
-By making this selection, the code is automatically created,   
-eliminating the need for the user to manually write each constructor or implement the builder pattern.   
+<ul>
+    <li>generation of boilerplate code for MockMvc tests for RestDocs.</li>
+    <li>generate constructors and builder patterns for a given class.</li>
+</ul>
 
-This functionality enhances the efficiency of code writing.
+When you input a class name and uses a dot,
+or on the Generate menu, in test scope,
+you can select RestController class and methods.
+Then the plugin automatically generates boilerplate code for MockMvc tests for RestDocs.
 
-Inspired by [kotlin-fill-class](https://github.com/suusan2go/kotlin-fill-class)
+And You can choose between 'All Args Constructor' and 'Builder Completion'.
+If 'All Args Constructor' is selected, a constructor containing all parameters is automatically generated.
+If 'Builder Completion' is selected, the code with the builder pattern is generated.
+
+This eliminates the need for the user to manually write each constructor or implement the builder pattern.
 
 ## Usage
+### Mock mvc Test and RestDocs boilerplate generator
+![2023-12-08 18-24-03](https://github.com/Boiler-Craft/java-boiler-craft/assets/60100532/0fb34607-8e10-42dd-a4eb-805658ecf06f)
+
+### Builder and Constructor completion 
 ![use_example](https://github.com/Boiler-Craft/java-boiler-craft/assets/98400407/4473c994-f401-4302-a9ba-144d7f970455)
 
 ## How to install
