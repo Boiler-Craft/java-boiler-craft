@@ -22,8 +22,10 @@
         <li>generate constructors and builder patterns for a given class.</li>
     </ul>
 
-    When you input a class name and uses a dot, in test scope,
-    the plugin automatically generates boilerplate code for MockMvc tests for RestDocs.
+    When you input a class name and uses a dot,
+    or on the Generate menu, in test scope,
+    you can select RestController class and methods.
+    Then the plugin automatically generates boilerplate code for MockMvc tests for RestDocs.
 
     And You can choose between 'All Args Constructor' and 'Builder Completion'.
     If 'All Args Constructor' is selected, a constructor containing all parameters is automatically generated.
