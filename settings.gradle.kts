@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "java-builder-fill"
+rootProject.name = "java-boiler-craft"
