@@ -20,6 +20,8 @@ This eliminates the need for the user to manually write each constructor or impl
 
 ## Usage
 ### Mock mvc Test and RestDocs boilerplate generator
+![2023-12-12 15-05-28](https://github.com/Boiler-Craft/java-boiler-craft/assets/60100532/4e778cca-3f64-44eb-a2db-4b6b3c6245d1)   
+
 ![2023-12-08 18-24-03](https://github.com/Boiler-Craft/java-boiler-craft/assets/60100532/0fb34607-8e10-42dd-a4eb-805658ecf06f)
 
 ### Builder and Constructor completion 
